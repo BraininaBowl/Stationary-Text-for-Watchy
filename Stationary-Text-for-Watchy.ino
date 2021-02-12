@@ -9,7 +9,7 @@ class WatchFace : public Watchy { //inherit and extend Watchy class
       uint16_t lines = 0;
       const char *lows [10] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
       const char *teensone [11] = {"","ten", "eleven", "twelve", "thir", "four", "fif", "six", "seven", "eight", "nine"};
-      const char *teenstwo [11] = {"", "","", "", "teen", "teen", "teen", "teen", "teen", "teen", "teen"};
+      const char *teenstwo [11] = {"", "","", "teen", "teen", "teen", "teen", "teen", "teen", "teen", "teen"};
       const char *tens [10] = {"zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
 
       //drawbg
@@ -48,8 +48,12 @@ class WatchFace : public Watchy { //inherit and extend Watchy class
       display.setCursor(8, lines*47-5);
       display.setFont(&NunitoSans_Light28pt7b);
       if (currentTime.Minute == 0) {
+        display.print("o'clock");
       } else if (currentTime.Minute < 10) {
-        display.print(lows[currentTime.Minute]);
+          display.print("oh");
+          lines += 1;
+          display.setCursor(8, lines*47-5);
+          display.print(lows[currentTime.Minute]);
       } else if (currentTime.Minute < 20) {
         display.print(teensone[currentTime.Minute-9]);
         if (currentTime.Minute > 12) {
